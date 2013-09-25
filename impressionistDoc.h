@@ -29,7 +29,7 @@ public:
 					  int srcBufferWidth, 
 					  int srcBufferHeight,
 					  unsigned char* destBuffer,
-					  const double *filterKernel, 
+					  const float *filterKernel, 
 					  int knlWidth, 
 					  int knlHeight, 
 					  double divisor, 

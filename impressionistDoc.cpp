@@ -360,7 +360,7 @@ int ImpressionistDoc::clearCanvas()
 void ImpressionistDoc::applyFilter( const unsigned char* sourceBuffer,
 		int srcBufferWidth, int srcBufferHeight,
 		unsigned char* destBuffer,
-		const double *filterKernel, 
+		const float *filterKernel, 
 		int knlWidth, int knlHeight, 
 		double divisor, double offset )
 {

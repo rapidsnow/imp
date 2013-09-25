@@ -37,19 +37,24 @@ void ScatteredLinesBrush::BrushMove( const Point source, const Point target )
 		return;
 	}
 
+	float tempRand;
+	int x1, y1;
+	int x2, y2;
+
 	int length = pDoc->getSize();
+	int radius = pDoc->getScatterRadius();
 
 	glBegin( GL_LINES );
 		SetColor( source );
 		for(int i = 0; i < 5; i++) {
-			//Choose two random vertices within 0.5 * length of source
-			int x1 = source.x + (frand() - 0.5) * length;
-			int y1 = source.y + (frand() - 0.5) * length;
+			//Choose two random vertices within 0.5 * scatter radius of source
+			x1 = source.x + (frand() - 0.5) * radius;
+			y1 = source.y + (frand() - 0.5) * radius;
 
 			//Create a unit vector in some random angle then multiply it by length and add to x1, y1
-			float tempRand = frand() * 2 * M_PI;
-			int x2 = cos(tempRand) * length + x1;
-			int y2 = sin(tempRand) * length + y1;
+			tempRand = frand() * 2 * M_PI;
+			x2 = cos(tempRand) * length + x1;
+			y2 = sin(tempRand) * length + y1;
 
 			//Random line in a random direction
 			glVertex2d( x1, y1 );

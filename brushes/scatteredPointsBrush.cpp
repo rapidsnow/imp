@@ -40,7 +40,7 @@ void ScatteredPointsBrush::BrushMove( const Point source, const Point target )
 	float randAngle;
 
 	int scatterRadius = pDoc->getScatterRadius(); //Set up a given radius size for your points
-	int n_Points = M_PI * pow(scatterRadius, 2.) * 50; //50 points per unit area?
+	int n_Points = M_PI * pow(scatterRadius, 2.) * 100; //50 points per unit area?
 
 	glBegin( GL_POINTS );
 		SetColor( source );

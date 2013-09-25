@@ -385,14 +385,23 @@ void ImpressionistUI::cb_kernel_values(Fl_Widget* o, void* v)
 void ImpressionistUI::cb_filter_kernel(Fl_Widget* o, void* v)
 {
 	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
-
+	ImpressionistUI * m_pUI = pDoc->m_pUI;
+	pDoc->applyFilter(pDoc->m_ucPainting,
+		pDoc->m_nPaintWidth,
+		pDoc->m_nPaintHeight,
+		pDoc->m_ucPainting,
+		m_pUI->m_nKernel,
+		5,
+		5,
+		0.,
+		0.);
 	/*pDoc->applyFilter(m_paintView, 
 		m_paintView->m_nWindowWidth, 
 		m_paintView->m_nWindowHeight, 
 		m_paintView, 
 		m_nKernel, 
-		pDoc->getKernelSizeX(), 
-		pDoc->getKernelSizeY(),
+		5 //pDoc->getKernelSizeX(), 
+		5 //pDoc->getKernelSizeY(),
 		0., 
 		m_paintView->m_pPaintBitstart);*/
 }
@@ -776,7 +785,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_ScatterRadiusSlider->labelfont(FL_COURIER);
 		m_ScatterRadiusSlider->labelsize(12);
 		m_ScatterRadiusSlider->minimum(1);
-		m_ScatterRadiusSlider->maximum(40);
+		m_ScatterRadiusSlider->maximum(100);
 		m_ScatterRadiusSlider->step(1);
 		m_ScatterRadiusSlider->value(m_nScatterRadius);
 		m_ScatterRadiusSlider->align(FL_ALIGN_RIGHT);
@@ -857,7 +866,18 @@ ImpressionistUI::ImpressionistUI() {
 			}
 		}
 
-	
+		//--------------------------------------------------------
+		//
+		//			Below is purely for testing because 
+		//			my kernel callbacks suck and I'm sick
+		//			of working on them.
+		//
+		//--------------------------------------------------------
+		m_nKernel[0]  = 0; m_nKernel[1]  = 0; m_nKernel[2]  = 0; m_nKernel[3]  = 0; m_nKernel[4]  = 0;
+		m_nKernel[5]  = 0; m_nKernel[6]  = 1; m_nKernel[7]  = 2; m_nKernel[8]  = 1; m_nKernel[9]  = 0;
+		m_nKernel[10] = 0; m_nKernel[11] = 0; m_nKernel[12] = 0; m_nKernel[13] = 0; m_nKernel[14] = 0;
+		m_nKernel[15] = 0; m_nKernel[16] = -1; m_nKernel[17] = -2; m_nKernel[18] = 1; m_nKernel[19] = 0;
+		m_nKernel[20] = 0; m_nKernel[21] = 0; m_nKernel[22] = 0; m_nKernel[23] = 0; m_nKernel[24] = 0;
 }
 
 ImpressionistUI::~ImpressionistUI()

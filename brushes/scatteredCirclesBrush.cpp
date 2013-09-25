@@ -45,7 +45,8 @@ void ScatteredCirclesBrush::BrushMove( const Point source, const Point target )
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg=pDoc->m_pUI;
 
-	float sep = 4; //The 4 seems like a good factor for circle separation... Two times the diameter
+	int scatterRadius = pDoc->getScatterRadius();
+	float randAngle;
 
 	if ( pDoc == NULL ) {
 		printf( "ScatteredCirclesBrush::BrushMove  document is NULL\n" );
@@ -53,7 +54,9 @@ void ScatteredCirclesBrush::BrushMove( const Point source, const Point target )
 	}
 	int radius = pDoc->getSize();
 	for(int i = 0; i < 20; i++) {
-		MakeCircle(Point(source.x + (frand() - 0.5) * radius * sep, source.y + (frand() - 0.5) * radius * sep), radius);
+		randAngle = frand() * 2 * M_PI;
+		MakeCircle(Point(source.x + (frand() - 0.5) * scatterRadius * cos(randAngle),
+			source.y + (frand() - 0.5) * scatterRadius * sin(randAngle)), radius);
 	}
 }
 
