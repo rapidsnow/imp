@@ -188,22 +188,44 @@ int ImpressionistDoc::getKernelSizeY()
 	return m_pUI->getKernelSizeY();
 }
 
+//Divisor getters/setters called by ui
+void ImpressionistDoc::setDivisor(float div)
+{
+	m_pUI->setDivisor(div);
+}
+
+float ImpressionistDoc::getDivisor()
+{
+	return m_pUI->getDivisor();
+}
+
+//Offset getters/setters called by ui
+void ImpressionistDoc::setOffset(float off)
+{
+	m_pUI->setOffset(off);
+}
+
+float ImpressionistDoc::getOffset()
+{
+	return m_pUI->getOffset();
+}
+
 //---------------------------------------------------------
 // Called by the UI when the user any value in 
 // the float input grid.
 //---------------------------------------------------------
-void ImpressionistDoc::setTmpKnlValue(float value)
+void ImpressionistDoc::setKnlValue(float value, int index)
 {
-	m_nTmpKnlValue = value;
+	m_pUI->setKnlValue(value, index);
 }
 
 //---------------------------------------------------------
 // Returns the value in the most recently
 // changed float input grid slot.
 //---------------------------------------------------------
-float ImpressionistDoc::getTmpKnlValue()
+float ImpressionistDoc::getKnlValue(int index)
 {
-	return m_pUI->getTmpKnlValue();
+	return m_pUI->getKnlValue(index);
 }
 
 //------------------------------------------------------------------
@@ -281,6 +303,10 @@ int ImpressionistDoc::loadImage(char *iname)
 	m_pUI->m_origView->resizeWindow(width, height);	
 	m_pUI->m_origView->refresh();
 
+	// resize preview
+	m_pUI->m_previewView->resizeWindow(width, height);
+	m_pUI->m_previewView->refresh();
+
 	// refresh paint view as well
 	m_pUI->m_paintView->resizeWindow(width, height);	
 	m_pUI->m_paintView->refresh();
@@ -327,6 +353,30 @@ int ImpressionistDoc::clearCanvas()
 	return 0;
 }
 
+//----------------------------------------------------------------
+// Clear the preview canvas
+// This is called by the UI when the cancel filter item is 
+// chosen
+//-----------------------------------------------------------------
+int ImpressionistDoc::clearPreview() 
+{
+
+	// Release old storage
+	if ( m_ucPreviewBackup ) 
+	{
+		delete [] m_ucPreviewBackup;
+
+		// allocate space for draw view
+		m_ucPreviewBackup = new unsigned char [m_nPaintWidth*m_nPaintHeight*4];
+		memset(m_ucPreviewBackup, 0, m_nPaintWidth*m_nPaintHeight*4);
+
+		// refresh paint view as well	
+		m_pUI->m_previewView->refresh();
+	}
+	
+	return 0;
+}
+
 // Apply the filter specified by filter_kernel to the 
 // each pixel in the source buffer and place the resulting
 // pixel in the destination buffer.  
@@ -362,7 +412,7 @@ void ImpressionistDoc::applyFilter( const unsigned char* sourceBuffer,
 		unsigned char* destBuffer,
 		const float *filterKernel, 
 		int knlWidth, int knlHeight, 
-		double divisor, double offset )
+		float divisor, double offset )
 {
 	float redSum;
 	float greenSum;
@@ -394,11 +444,11 @@ void ImpressionistDoc::applyFilter( const unsigned char* sourceBuffer,
 
 					//Set the index values for our current pixel
 					knlIndex = knlRow * knlWidth + knlColumn;
-					srcIndex = 3 * ((row + knlRow - knlWidth/2 + 1) * srcBufferWidth
-						+ (column + knlColumn - knlColumn/2 + 1));
+					srcIndex = 3 * ((row + knlRow - knlWidth/2) * srcBufferWidth
+						+ (column + knlColumn - knlColumn/2));
 
 					if (srcIndex < 0 || srcIndex > 3*srcBufferWidth*srcBufferHeight) {
-						srcIndex = 3 * (row * srcBufferWidth + column);
+						continue;
 					}
 					
 					//TODO: Fix edge problems.
@@ -416,9 +466,9 @@ void ImpressionistDoc::applyFilter( const unsigned char* sourceBuffer,
 			}
 
 			//Average the filter kernel values
-			destBuffer[3*(row*srcBufferWidth+column)+0] = redSum/divisor;
- 			destBuffer[3*(row*srcBufferWidth+column)+1] = greenSum/divisor;
- 			destBuffer[3*(row*srcBufferWidth+column)+2] = blueSum/divisor;
+			destBuffer[3*(row*srcBufferWidth+column)+0] = redSum/divisor + offset;
+ 			destBuffer[3*(row*srcBufferWidth+column)+1] = greenSum/divisor + offset;
+ 			destBuffer[3*(row*srcBufferWidth+column)+2] = blueSum/divisor + offset;
 		}
 	}
 

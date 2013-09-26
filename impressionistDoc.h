@@ -24,6 +24,7 @@ public:
 
 
 	int     clearCanvas();                  // called by the UI to clear the drawing canvas
+	int     clearPreview();                 // called by the UI to clear the preview canvas
 
 	void applyFilter( const unsigned char* sourceBuffer, //The filter kernel
 					  int srcBufferWidth, 
@@ -32,7 +33,7 @@ public:
 					  const float *filterKernel, 
 					  int knlWidth, 
 					  int knlHeight, 
-					  double divisor, 
+					  float divisor, 
 					  double offset );
 
 	void	setBrushType(int type);					// called by the UI to set the brushType
@@ -61,8 +62,12 @@ public:
 	int		getKernelSizeX();						//Get the x kernel dimension
 	void	setKernelSizeY(int size);				//Set the y kernel dimension
 	int		getKernelSizeY();						//Get the y kernel dimension
-	void	setTmpKnlValue(float value);			//Set the temporary kernel value
-	float   getTmpKnlValue();						//Get the temporary kernel value
+	void	setDivisor(float div);
+	float	getDivisor();
+	void	setOffset(float off);
+	float	getOffset();
+	void	setKnlValue(float value, int index);	//Set the temporary kernel value
+	float   getKnlValue(int index);					//Get the temporary kernel value
 
 	Point	getLastPoint();							// get the last point, used for brush angle calculations
 	void	setLastPoint(Point start);				// set the last point, used for brush angle calculations

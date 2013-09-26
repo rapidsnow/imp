@@ -22,6 +22,7 @@
 #include "impressionist.h"
 #include "originalView.h"
 #include "paintView.h"
+#include "previewView.h"
 
 #include "impBrush.h"
 
@@ -38,6 +39,7 @@ public:
 	Fl_Menu_Bar*		m_menubar;
 								
 	PaintView*			m_paintView;
+	PreviewView*		m_previewView;
 	OriginalView*		m_origView;
 
 // for brush dialog
@@ -58,7 +60,11 @@ public:
 	Fl_Choice*			m_KernelSizeXChoice;
 	Fl_Choice*			m_KernelSizeYChoice;
 	Fl_Button*			m_ApplyKernelButton;
-	Fl_Float_Input*		m_KernelGrid[5*5];
+	Fl_Button*			m_PreviewKernelButton;
+	Fl_Button*			m_CancelKernelButton;
+	Fl_Float_Input*		m_KernelDivisorInput;
+	Fl_Float_Input*		m_KernelOffsetInput;
+	Fl_Float_Input*		m_KernelGrid[3*3];
 
 	// Member functions
 	void				setDocument(ImpressionistDoc* doc);
@@ -102,9 +108,14 @@ public:
 	int					getKernelSizeY();
 	void				setKernelSizeY(int size);
 
-	float				getTmpKnlValue();
-	void				setTmpKnlValue(float value);
+	float				getKnlValue(int index);
+	void				setKnlValue(float value, int index);
 
+	void				setDivisor(float div);
+	float				getDivisor();
+
+	void				setOffset(float div);
+	float				getOffset();
 
 private:
 	ImpressionistDoc*	m_pDoc;		// pointer to document to communicate with the document
@@ -120,7 +131,9 @@ private:
 
 	int m_nKernelSizeX;
 	int m_nKernelSizeY;
-	float m_nKernel[5*5];
+	float m_nDivisor;
+	float m_nOffset;
+	float m_nKernel[3*3];
 	float m_nTmpKnlValue;
 
 	// These attributes are set by the filter kernel UI
@@ -133,7 +146,7 @@ private:
 	// Static class members
 	static Fl_Menu_Item		menuitems[];
 	static Fl_Menu_Item		brushTypeMenu[NUM_BRUSH_TYPE+1];
-	static Fl_Menu_Item		kernelSizeMenu[6];
+	static Fl_Menu_Item		kernelSizeMenu[4];
 
 	static ImpressionistUI*	whoami(Fl_Menu_* o);
 
@@ -156,10 +169,23 @@ private:
 	static void cb_angleSlides(Fl_Widget* o, void* v);
 	static void cb_alphaSlides(Fl_Widget* o, void* v);
 	static void cb_scatterRadiusSlides(Fl_Widget* o, void* v);
-	static void	cb_filter_kernel(Fl_Widget* o, void* v);		
+	static void	cb_filter_kernel(Fl_Widget* o, void* v);
+	static void	cb_filter_preview(Fl_Widget* o, void* v);
 	static void	cb_kernel_size_x(Fl_Widget* o, void* v);
 	static void	cb_kernel_size_y(Fl_Widget* o, void* v);
-	static void	cb_kernel_values(Fl_Widget* o, void* v);
+	static void	cb_divisor(Fl_Widget* o, void* v);
+	static void	cb_offset(Fl_Widget* o, void* v);
+	static void	cb_cancel(Fl_Widget* o, void* v);
+	//static void	cb_kernel_values(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_0(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_1(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_2(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_3(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_4(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_5(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_6(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_7(Fl_Widget* o, void* v);
+	static void	cb_kernel_values_8(Fl_Widget* o, void* v);
 
 };
 

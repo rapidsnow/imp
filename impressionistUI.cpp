@@ -260,6 +260,68 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 	long long tmp = reinterpret_cast<long long>(v);
 	int type = static_cast<int>(tmp);
 
+
+
+	/*
+	//-------------------------------------------------
+	// The following switch statement activates and 
+	// deactivates all brush widgets appropriately
+	//-------------------------------------------------
+	switch (type)
+	{
+		case 0: //Points
+			pUI->m_BrushSizeSlider->activate();
+			pUI->m_LineWidthSlider->deactivate();
+			pUI->m_BrushAngleSlider->deactivate();
+			pUI->m_AlphaSlider->activate();
+			pUI->m_ScatterRadiusSlider->deactivate();
+			pUI->m_BrushAngleRadio->deactivate();
+			break;
+		case 1: //Lines
+			pUI->m_BrushSizeSlider->activate();
+			pUI->m_LineWidthSlider->activate();
+			pUI->m_BrushAngleSlider->activate();
+			pUI->m_AlphaSlider->activate();
+			pUI->m_ScatterRadiusSlider->deactivate();
+			pUI->m_BrushAngleRadio->activate();
+			break;	
+		case 2: //Circles
+			pUI->m_BrushSizeSlider->activate();
+			pUI->m_LineWidthSlider->deactivate();
+			pUI->m_BrushAngleSlider->deactivate();
+			pUI->m_AlphaSlider->activate();
+			pUI->m_ScatterRadiusSlider->deactivate();
+			pUI->m_BrushAngleRadio->deactivate();
+			break;
+		case 3: //Scattered Points
+			pUI->m_BrushSizeSlider->activate();
+			pUI->m_LineWidthSlider->deactivate();
+			pUI->m_BrushAngleSlider->deactivate();
+			pUI->m_AlphaSlider->activate();
+			pUI->m_ScatterRadiusSlider->activate();
+			pUI->m_BrushAngleRadio->deactivate();
+			break;
+		case 4: //Scattered Lines
+			pUI->m_BrushSizeSlider->activate();
+			pUI->m_LineWidthSlider->activate();
+			pUI->m_BrushAngleSlider->deactivate();
+			pUI->m_AlphaSlider->activate();
+			pUI->m_ScatterRadiusSlider->activate();
+			pUI->m_BrushAngleRadio->deactivate();
+			break;
+		case 5: //Scattered Circles
+			pUI->m_BrushSizeSlider->activate();
+			pUI->m_LineWidthSlider->deactivate();
+			pUI->m_BrushAngleSlider->deactivate();
+			pUI->m_AlphaSlider->activate();
+			pUI->m_ScatterRadiusSlider->activate();
+			pUI->m_BrushAngleRadio->deactivate();
+			break;
+		default: 
+			break;
+}
+*/
+
 	pDoc->setBrushType(type);
 }
 
@@ -366,45 +428,145 @@ void ImpressionistUI::cb_kernel(Fl_Menu_* o, void* v)
 	whoami(o)->m_kernelDialog->show();
 }
 
-//---The kernel grid callback------------------------
-void ImpressionistUI::cb_kernel_values(Fl_Widget* o, void* v)
+//---The kernel grid callbacks------------------------
+// I'm really sad that I couldn't get my more elegant solution to work, 
+// but the casting just wasn't working and it got late
+void ImpressionistUI::cb_kernel_values_0(Fl_Widget* o, void* v)
 {
 	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
-
-	//	int index=(int)v;
-	long long tmp = reinterpret_cast<long long>(v);
-	int index = static_cast<int>(tmp);
-
 	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
-	printf("%d: %f\n", index, value);
 
-	//pDoc->setTmpKnlValue(value);
+	pDoc->setKnlValue(value, 0);
+}
+void ImpressionistUI::cb_kernel_values_1(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 1);
+}
+void ImpressionistUI::cb_kernel_values_2(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 2);
+}
+void ImpressionistUI::cb_kernel_values_3(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 3);
+}
+void ImpressionistUI::cb_kernel_values_4(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 4);
+}
+void ImpressionistUI::cb_kernel_values_5(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 5);
+}
+void ImpressionistUI::cb_kernel_values_6(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 6);
+}
+void ImpressionistUI::cb_kernel_values_7(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 7);
+}
+void ImpressionistUI::cb_kernel_values_8(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float value = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setKnlValue(value, 8);
+}
+//Divisor callback
+void ImpressionistUI::cb_divisor(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float div = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setDivisor(div);
+}
+//Offset callback
+void ImpressionistUI::cb_offset(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	float off = atof( ((Fl_Float_Input *)o)->value() ); //atof() casts from unsigned char to float
+
+	pDoc->setOffset(off);
 }
 
+//Cancel callback
+void ImpressionistUI::cb_cancel(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	ImpressionistUI * m_pUI = pDoc->m_pUI;
+
+	m_pUI->m_kernelDialog->hide();
+
+	pDoc->clearPreview();
+
+	m_pUI->m_paintView->show();
+	m_pUI->m_previewView->hide();
+}
 
 void ImpressionistUI::cb_filter_kernel(Fl_Widget* o, void* v)
 {
 	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
 	ImpressionistUI * m_pUI = pDoc->m_pUI;
+
 	pDoc->applyFilter(pDoc->m_ucPainting,
 		pDoc->m_nPaintWidth,
 		pDoc->m_nPaintHeight,
 		pDoc->m_ucPainting,
 		m_pUI->m_nKernel,
-		5,
-		5,
-		0.,
-		0.);
-	/*pDoc->applyFilter(m_paintView, 
-		m_paintView->m_nWindowWidth, 
-		m_paintView->m_nWindowHeight, 
-		m_paintView, 
-		m_nKernel, 
-		5 //pDoc->getKernelSizeX(), 
-		5 //pDoc->getKernelSizeY(),
-		0., 
-		m_paintView->m_pPaintBitstart);*/
+		3, //pDoc->getKernelSizeX()
+		3, //pDoc->getKernelSizeY()
+		pDoc->getDivisor(),
+		pDoc->getOffset());
+
+	m_pUI->m_previewView->hide();
+	m_pUI->m_paintView->show();
+	
+	m_pUI->m_paintView->refresh();
 }
+
+void ImpressionistUI::cb_filter_preview(Fl_Widget* o, void* v)
+{
+	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	ImpressionistUI * m_pUI = pDoc->m_pUI;
+
+	pDoc->applyFilter(pDoc->m_ucPainting,
+		pDoc->m_nPaintWidth,
+		pDoc->m_nPaintHeight,
+		pDoc->m_ucPreviewBackup,
+		m_pUI->m_nKernel,
+		3, //pDoc->getKernelSizeX()
+		3, //pDoc->getKernelSizeY()
+		pDoc->getDivisor(),
+		pDoc->getOffset());
+		
+	m_pUI->m_previewView->show();
+	m_pUI->m_paintView->hide();
+
+	m_pUI->m_previewView->refresh();
+}
+
 
 void ImpressionistUI::cb_kernel_size_x(Fl_Widget* o, void* v)
 {
@@ -427,7 +589,6 @@ void ImpressionistUI::cb_kernel_size_y(Fl_Widget* o, void* v)
 
 	pDoc->setKernelSizeY(size);
 }
-
 //---------------------------------- per instance functions --------------------------------------
 
 //------------------------------------------------
@@ -445,6 +606,7 @@ void ImpressionistUI::show() {
 	m_mainWindow->show();
 	m_paintView->show();
 	m_origView->show();
+	m_previewView->hide();
 }
 
 //------------------------------------------------
@@ -454,6 +616,7 @@ void ImpressionistUI::show() {
 void ImpressionistUI::resize_windows(int w, int h) {
 	m_paintView->size(w,h);
 	m_origView->size(w,h);
+	m_previewView->size(w,h);
 }
 
 //------------------------------------------------ 
@@ -466,6 +629,7 @@ void ImpressionistUI::setDocument(ImpressionistDoc* doc)
 
 	m_origView->m_pDoc = doc;
 	m_paintView->m_pDoc = doc;
+	m_previewView->m_pDoc = doc;
 }
 
 //------------------------------------------------
@@ -615,17 +779,38 @@ void ImpressionistUI::setKernelSizeY(int size)
 //------------------------------------------------
 // Return the temporary kernel value
 //------------------------------------------------
-float ImpressionistUI::getTmpKnlValue()
+float ImpressionistUI::getKnlValue(int index)
 {
-	return m_nTmpKnlValue;
+	return m_nKernel[index];
 }
 
 //------------------------------------------------
 // Set the temporary kernel value
 //------------------------------------------------
-void ImpressionistUI::setTmpKnlValue(float tmp)
+void ImpressionistUI::setKnlValue(float tmp, int index)
 {
-	m_nTmpKnlValue=tmp;
+	m_nKernel[index] = tmp;
+}
+
+//Kernel divisor getters/setters
+void ImpressionistUI::setDivisor(float div)
+{
+	m_nDivisor=div;
+}
+
+float ImpressionistUI::getDivisor()
+{
+	return m_nDivisor;
+}
+
+void ImpressionistUI::setOffset(float off)
+{
+	m_nOffset=off;
+}
+
+float ImpressionistUI::getOffset()
+{
+	return m_nOffset;
 }
 
 // Main menu definition
@@ -659,12 +844,12 @@ Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
 };
 
 // Kernel Size menu definition
-Fl_Menu_Item ImpressionistUI::kernelSizeMenu[6] = {
+Fl_Menu_Item ImpressionistUI::kernelSizeMenu[4] = {
   {"1",	FL_ALT+'1', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 1},
   {"2",	FL_ALT+'2', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 2},
   {"3",	FL_ALT+'3', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 3},
-  {"4",	FL_ALT+'4', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 4},
-  {"5",	FL_ALT+'5', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 5},
+//  {"4",	FL_ALT+'4', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 4},
+//  {"5",	FL_ALT+'5', (Fl_Callback *)ImpressionistUI::cb_kernel_size_x, (void *) 5},
   {0}
 };
 
@@ -697,6 +882,11 @@ ImpressionistUI::ImpressionistUI() {
 
 		group->end();
 		Fl_Group::current()->resizable(group);
+
+		// install preview window
+			m_previewView = new PreviewView(300, 25, 300, 275, "This is the preview view");
+			m_previewView->box(FL_DOWN_FRAME);
+
     m_mainWindow->end();
 
 	// init values
@@ -708,6 +898,8 @@ ImpressionistUI::ImpressionistUI() {
 
 	m_nKernelSizeX = 5;
 	m_nKernelSizeY = 5;
+	m_nDivisor = 1;
+	m_nOffset = 0;
 
 	// brush dialog definition
 	m_brushDialog = new Fl_Window(450, 325, "Brush Dialog");
@@ -827,57 +1019,85 @@ ImpressionistUI::ImpressionistUI() {
 		m_brushDialog->end();
 
 	//Create the kernel dialog window
-	m_kernelDialog = new Fl_Window(400, 400, "Kernel Dialog");
+	m_kernelDialog = new Fl_Window(310, 325, "Kernel Dialog");
 		//Create a button to preview the filter kernel to the image
-		//m_ApplyKernelButton = new Fl_Button(240,10,150,25,"&Preview Filter");
-		//m_ApplyKernelButton->user_data((void*)(this));
-		//m_ApplyKernelButton->callback(cb_filter_kernel);
+		m_PreviewKernelButton = new Fl_Button(120,245,150,25,"&Preview Filter");
+		m_PreviewKernelButton->user_data((void*)(this));
+		m_PreviewKernelButton->callback(cb_filter_preview);
 	
+		//Create a button to cancel the preview and kill the window
+		m_CancelKernelButton = new Fl_Button(120,280,150,25,"&Cancel");
+		m_CancelKernelButton->user_data((void*)(this));
+		m_CancelKernelButton->callback(cb_cancel);
+
 		//Create a button to actually apply the filter kernel to the image
-		m_ApplyKernelButton = new Fl_Button(240,10,150,25,"&Apply Filter");
+		m_ApplyKernelButton = new Fl_Button(120,210,150,25,"&Apply Filter");
 		m_ApplyKernelButton->user_data((void*)(this));
 		m_ApplyKernelButton->callback(cb_filter_kernel);
 
-		m_KernelSizeXChoice = new Fl_Choice(60,30,50,25,"&X Size");
+		//Create a float input to get and return the offset value
+		m_KernelOffsetInput = new Fl_Float_Input(80,155,150,25,"&Offset");
+		m_KernelOffsetInput->user_data((void*)(this));
+		m_KernelOffsetInput->callback(cb_offset);
+
+		//Create a float input to get and return the divisor value
+		m_KernelDivisorInput = new Fl_Float_Input(80,180,150,25,"&Divisor");
+		m_KernelDivisorInput->user_data((void*)(this));
+		m_KernelDivisorInput->callback(cb_divisor);
+
+		m_KernelSizeXChoice = new Fl_Choice(60,210,50,25,"&X Size");
 		m_KernelSizeXChoice->user_data((void*)(this));	// record self to be used by static callback functions
 		m_KernelSizeXChoice->menu(kernelSizeMenu);
 
 		//TODO: Add functionality to create and destroy the grid below
 		m_KernelSizeXChoice->callback(cb_kernel_size_x);
 
-		m_KernelSizeYChoice = new Fl_Choice(60,65,50,25,"&Y Size");
+		m_KernelSizeYChoice = new Fl_Choice(60,245,50,25,"&Y Size");
 		m_KernelSizeYChoice->user_data((void*)(this));	// record self to be used by static callback functions
 		m_KernelSizeYChoice->menu(kernelSizeMenu);
 
 		//TODO: Add functionality to create and destroy the grid below
 		m_KernelSizeYChoice->callback(cb_kernel_size_y);
 
-		int knlIndex;
 		//Create a grid of inputs for the kernel size
-		for(int row = 0; row < m_nKernelSizeY; row++) {
-			for(int column=0; column < m_nKernelSizeX; column++) {
+		for(int row = 0; row < 3; row++) {
+			for(int column=0; column < 3; column++) {
+				m_KernelGrid[row*3+column] = new Fl_Float_Input(95 + column * 40, 25 + row * 40, 35, 35, "");
+				m_KernelGrid[row*3+column]->user_data((void*)(this));   // record self to be used by static callback functions
+				m_KernelGrid[row*3+column]->when(FL_WHEN_CHANGED);
+			}
+		}
+
+		m_KernelGrid[0]->callback(cb_kernel_values_0);
+		m_KernelGrid[1]->callback(cb_kernel_values_1);
+		m_KernelGrid[2]->callback(cb_kernel_values_2);
+		m_KernelGrid[3]->callback(cb_kernel_values_3);
+		m_KernelGrid[4]->callback(cb_kernel_values_4);
+		m_KernelGrid[5]->callback(cb_kernel_values_5);
+		m_KernelGrid[6]->callback(cb_kernel_values_6);
+		m_KernelGrid[7]->callback(cb_kernel_values_7);
+		m_KernelGrid[8]->callback(cb_kernel_values_8);
+		
+
+
+		//--------------------------------------------------
+		// My broken, crushed dreams :(
+		//--------------------------------------------------
+
+		/*int knlIndex;
+		//Create a grid of inputs for the kernel size
+		for(int row = 0; row < 3; row++) {
+			for(int column=0; column < 3; column++) {
 				knlIndex=row*m_nKernelSizeX+column;
 				m_KernelGrid[knlIndex] = new Fl_Float_Input(100 + column * 30, 125 + row * 30, 25, 25, "");
 				m_KernelGrid[knlIndex]->user_data((void*)(this));   // record self to be used by static callback functions
 				m_KernelGrid[knlIndex]->when(FL_WHEN_CHANGED);
-				m_KernelGrid[knlIndex]->callback(cb_kernel_values);
+				m_KernelGrid[knlIndex]->callback(cb_kernel_values, &knlIndex);
+
 				m_nKernel[knlIndex] = m_nTmpKnlValue;//This row is useless right now, needs to be part of a callback
 				//^^ This means that we need to somehow pass in the index to the callback, but I can't figure out how to do that.
 			}
-		}
-
-		//--------------------------------------------------------
-		//
-		//			Below is purely for testing because 
-		//			my kernel callbacks suck and I'm sick
-		//			of working on them.
-		//
-		//--------------------------------------------------------
-		m_nKernel[0]  = 0; m_nKernel[1]  = 0; m_nKernel[2]  = 0; m_nKernel[3]  = 0; m_nKernel[4]  = 0;
-		m_nKernel[5]  = 0; m_nKernel[6]  = 1; m_nKernel[7]  = 2; m_nKernel[8]  = 1; m_nKernel[9]  = 0;
-		m_nKernel[10] = 0; m_nKernel[11] = 0; m_nKernel[12] = 0; m_nKernel[13] = 0; m_nKernel[14] = 0;
-		m_nKernel[15] = 0; m_nKernel[16] = -1; m_nKernel[17] = -2; m_nKernel[18] = 1; m_nKernel[19] = 0;
-		m_nKernel[20] = 0; m_nKernel[21] = 0; m_nKernel[22] = 0; m_nKernel[23] = 0; m_nKernel[24] = 0;
+		}*/
 }
 
 ImpressionistUI::~ImpressionistUI()
